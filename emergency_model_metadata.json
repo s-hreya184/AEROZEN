@@ -1,0 +1,64 @@
+{
+  "model_version": "1.0",
+  "training_samples": 4000,
+  "test_samples": 1000,
+  "features": [
+    "engine_health",
+    "vibration_level",
+    "fuel_pressure",
+    "hydraulic_pressure",
+    "oil_temperature",
+    "cabin_pressure",
+    "fuel_quantity",
+    "electrical_system_health",
+    "flight_control_response",
+    "weather_severity",
+    "altitude",
+    "airspeed",
+    "turbulence_level",
+    "visibility",
+    "wind_shear",
+    "time_of_day",
+    "phase_of_flight",
+    "pilot_experience_years",
+    "aircraft_age_years"
+  ],
+  "categorical_features": [
+    "time_of_day",
+    "phase_of_flight"
+  ],
+  "numerical_features": [
+    "aircraft_age_years",
+    "airspeed",
+    "altitude",
+    "cabin_pressure",
+    "electrical_system_health",
+    "engine_health",
+    "flight_control_response",
+    "fuel_pressure",
+    "fuel_quantity",
+    "hydraulic_pressure",
+    "oil_temperature",
+    "pilot_experience_years",
+    "turbulence_level",
+    "vibration_level",
+    "visibility",
+    "weather_severity",
+    "wind_shear"
+  ],
+  "risk_levels": [
+    "Low",
+    "Moderate",
+    "High",
+    "Critical"
+  ],
+  "actions": [
+    "Continue Normal Operations",
+    "Increase Monitoring",
+    "Prepare Diversion Plan",
+    "Initiate Emergency Procedures"
+  ],
+  "binary_model_accuracy": 0.907,
+  "binary_model_auc": 0.9418036653964799,
+  "risk_model_accuracy": 0.681
+}

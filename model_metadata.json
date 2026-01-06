@@ -1,0 +1,52 @@
+{
+  "model_version": "1.0",
+  "training_samples": 4000,
+  "test_samples": 1000,
+  "features": [
+    "aircraft_age_years",
+    "hours_since_last_maintenance",
+    "cycles_since_last_maintenance",
+    "last_maintenance_type",
+    "avg_flight_duration_last_30_days",
+    "total_flight_hours",
+    "total_cycles",
+    "reported_minor_issues_last_30_days",
+    "ambient_temperature_avg",
+    "harsh_landing_count_last_30_days",
+    "manufacturer",
+    "model_type",
+    "utilization_rate"
+  ],
+  "categorical_features": [
+    "last_maintenance_type",
+    "manufacturer",
+    "model_type"
+  ],
+  "numerical_features": [
+    "aircraft_age_years",
+    "ambient_temperature_avg",
+    "avg_flight_duration_last_30_days",
+    "cycles_since_last_maintenance",
+    "harsh_landing_count_last_30_days",
+    "hours_since_last_maintenance",
+    "reported_minor_issues_last_30_days",
+    "total_cycles",
+    "total_flight_hours",
+    "utilization_rate"
+  ],
+  "risk_levels": [
+    "Low",
+    "Medium",
+    "High",
+    "Critical"
+  ],
+  "actions": [
+    "Continue",
+    "Monitor",
+    "Schedule Maintenance",
+    "Immediate Maintenance"
+  ],
+  "binary_model_accuracy": 0.854,
+  "binary_model_auc": 0.8877202656092353,
+  "risk_model_accuracy": 0.612
+}
