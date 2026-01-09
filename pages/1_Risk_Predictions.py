@@ -7,6 +7,14 @@ from pathlib import Path
 import requests
 import json
 
+import streamlit as st
+
+st.set_page_config(
+    page_title="Risk Predictions & AI Copilot",
+    layout="wide"
+)
+
+
 # ---------------- SESSION STATE INITIALIZATION ----------------
 if 'weather_delay_result' not in st.session_state:
     st.session_state.weather_delay_result = None

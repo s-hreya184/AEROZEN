@@ -1,43 +1,32 @@
 import streamlit as st
 from PIL import Image
+from pathlib import Path
 
 st.set_page_config(layout="wide", page_title="Global Travel Network")
 
 st.markdown("""
 <style>
-    .stApp {
-        background: linear-gradient(to bottom, #1a3a5c 0%, #5a89b8 100%);
-        margin: 0;
-        padding: 0;
-    }
-    
-    .main {
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-    
-    .block-container {
-        padding: 2rem;
-        max-width: 55%;
-    }
-    
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    
-    [data-testid="stImage"] {
-        display: flex;
-        justify-content: center;
-    }
+.stApp {
+    background: linear-gradient(to bottom, #1a3a5c 0%, #5a89b8 100%);
+}
+.block-container {
+    padding-top: 3rem;
+}
+#MainMenu, footer, header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-# Load and display the image
-try:
-    image = Image.open("travel_map.png")
-    st.image(image, use_container_width=True)
-except:
-    st.error("Please place 'travel_map.png' in the same directory as this script")
+# Load image safely
+img_path = Path.cwd() / "travel_map.png"
+image = Image.open(img_path)
+
+# Resize to reduce height
+new_height = 500
+w, h = image.size
+new_width = int(w * (new_height / h))
+image = image.resize((new_width, new_height))
+
+# CENTER the image
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image(image)

@@ -1,9 +1,18 @@
 import streamlit as st
+
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from ortools.sat.python import cp_model
 from datetime import datetime, timedelta
+
+import streamlit as st
+
+st.set_page_config(
+    page_title="Crew Schedule Optimizer",
+    layout="wide"
+)
+
 
 # Page configuration
 st.set_page_config(page_title="OR-Tools Schedule Optimizer", layout="wide", initial_sidebar_state="collapsed")
