@@ -21,13 +21,20 @@ if 'selected_module' not in st.session_state:
 # ============================================================================
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
     [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #1a1d2e 0%, #2d1b4e 100%);
+        background: linear-gradient(135deg, #0a0e1a 0%, #1a1d2e 50%, #2d1b4e 100%);
     }
     
     .main {
-        background-color: #1a1d2e;
+        background-color: transparent;
         color: #ffffff;
+        padding-top: 1rem !important;
     }
     
     h1, h2, h3, h4, p, label, span, div {
@@ -39,73 +46,138 @@ st.markdown("""
         background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         color: white;
         border: none;
-        padding: 12px;
+        padding: 0.75rem 1.5rem;
         border-radius: 8px;
-        margin: 5px 0;
         font-weight: 600;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
         transition: all 0.3s ease;
+        font-size: 1rem;
     }
     
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
     }
     
     [data-testid="stSidebar"] {
-        background-color: #1a1d2e;
+        background: linear-gradient(180deg, #0f1419 0%, #1a1d2e 100%);
     }
     
     .module-card {
-        background: linear-gradient(135deg, #2d3250 0%, #3d4260 100%);
-        padding: 30px;
-        border-radius: 15px;
-        margin: 20px 0;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(59, 130, 246, 0.04) 100%);
+        padding: 1.75rem;
+        border-radius: 12px;
+        border: 1px solid rgba(37, 99, 235, 0.25);
         transition: all 0.3s ease;
+        height: 100%;
+        backdrop-filter: blur(10px);
     }
     
     .module-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);
         border: 1px solid rgba(37, 99, 235, 0.5);
     }
     
     .feature-badge {
-        background-color: rgba(37, 99, 235, 0.2);
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-size: 12px;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
+        padding: 0.3rem 0.85rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
         display: inline-block;
-        margin: 5px 5px 5px 0;
-        border: 1px solid rgba(37, 99, 235, 0.4);
+        margin: 0.3rem 0.3rem 0.3rem 0;
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+    
+    .hero-section {
+        text-align: center;
+        padding: 2.5rem 0 0.5rem 0;
+        background: linear-gradient(180deg, rgba(37, 99, 235, 0.08) 0%, transparent 100%);
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .info-box {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.06) 100%);
+        padding: 1.2rem 1.75rem;
+        border-radius: 10px;
+        border-left: 4px solid #2563eb;
+        margin: 1.25rem 0;
+        backdrop-filter: blur(10px);
+    }
+    
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+    }
+    
+    .tech-item {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .tech-item:hover {
+        border-color: rgba(37, 99, 235, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    .streamlit-expanderHeader {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+    }
+    
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    hr {
+        margin: 2rem 0 !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    .feature-section {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+        padding: 1.25rem;
+        border-radius: 10px;
+        border-left: 3px solid;
+        height: 100%;
     }
 </style>
 """, unsafe_allow_html=True)
 
-
-
 # ============================================================================
-# HEADER
+# HERO SECTION
 # ============================================================================
 st.markdown("""
-<div style='text-align: center; padding: 40px 0 20px 0;'>
-    <h1 style='font-size: 3.5rem; margin-bottom: 10px;'>🛫 Azure Wings</h1>
-    <p style='font-size: 1.3rem; color: #94a3b8;'>Integrated Aviation Management Platform</p>
+<div class='hero-section'>
+    <h1 style='font-size: 2.75rem; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: -0.02em;'>
+        Azure Wings
+    </h1>
+    <p style='font-size: 1.15rem; color: #94a3b8; margin: 0; font-weight: 400; letter-spacing: 0.01em;'>
+        Integrated Aviation Management Platform
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("---")
-
 # ============================================================================
-# NAVIGATION INFO
+# WELCOME MESSAGE
 # ============================================================================
 st.markdown("""
-<div style='background-color: rgba(37, 99, 235, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #2563eb; margin: 30px 0;'>
-    <h3 style='margin-top: 0;'>📍 Welcome to Azure Wings Platform</h3>
-    <p style='color: #94a3b8; line-height: 1.8;'>
-        This is your central hub for aviation operations management. Use the sidebar to navigate between modules
- for risk prediction, crew scheduling, and operational optimization.
+<div class='info-box'>
+    <p style='color: #cbd5e1; margin: 0; line-height: 1.7; font-size: 0.95rem;'>
+        <strong style='color: #ffffff;'>Platform Overview:</strong> Transform aviation operations through AI-powered risk prediction, 
+        intelligent crew scheduling, and real-time optimization. Built with enterprise-grade machine learning and optimization algorithms.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -113,162 +185,174 @@ st.markdown("""
 # ============================================================================
 # MODULE CARDS
 # ============================================================================
-
 col1, col2 = st.columns(2, gap="large")
 
 with col1:
     st.markdown("""
     <div class='module-card'>
-        <h2 style='color: #60a5fa; margin-top: 0;'>📊 Risk Predictions & AI Copilot</h2>
-        <p style='color: #94a3b8; line-height: 1.8; margin: 20px 0;'>
-            Advanced machine learning models for real-time aviation risk assessment and prediction across multiple domains.
+        <h3 style='color: #60a5fa; margin: 0 0 0.85rem 0; font-size: 1.35rem; font-weight: 600;'>
+            Risk Predictions & AI Copilot
+        </h3>
+        <p style='color: #94a3b8; font-size: 0.92rem; margin: 0 0 1.25rem 0; line-height: 1.6;'>
+            Advanced machine learning models for comprehensive aviation risk assessment with integrated AI assistant for intelligent decision support and analysis.
         </p>
-        <div style='margin: 20px 0;'>
-            <span class='feature-badge'>Weather Delay Prediction</span>
-            <span class='feature-badge'>Crew Sickness Analysis</span>
-            <span class='feature-badge'>Equipment Failure Detection</span>
-            <span class='feature-badge'>Emergency Landing Risk</span>
-            <span class='feature-badge'>Operational Risk Index</span>
-            <span class='feature-badge'>AI-Powered Copilot (Phi-3)</span>
+        <div style='margin: 1rem 0 0 0;'>
+            <span class='feature-badge'>Weather Delay Analysis</span>
+            <span class='feature-badge'>Crew Health Monitoring</span>
+            <span class='feature-badge'>Equipment Failure Prediction</span>
+            <span class='feature-badge'>Emergency Risk Assessment</span>
+            <span class='feature-badge'>AI-Powered Copilot</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
-    
-    st.info("📊 Open **Risk Predictions & AI Copilot** from the sidebar")
-
-        
+    st.info("Navigate to Risk Predictions module via sidebar")
 
 with col2:
     st.markdown("""
     <div class='module-card'>
-        <h2 style='color: #4ade80; margin-top: 0;'>📅 Crew Schedule Optimizer</h2>
-        <p style='color: #94a3b8; line-height: 1.8; margin: 20px 0;'>
-            Intelligent crew scheduling system powered by Google OR-Tools for optimal resource allocation and compliance.
+        <h3 style='color: #4ade80; margin: 0 0 0.85rem 0; font-size: 1.35rem; font-weight: 600;'>
+            Crew Schedule Optimizer
+        </h3>
+        <p style='color: #94a3b8; font-size: 0.92rem; margin: 0 0 1.25rem 0; line-height: 1.6;'>
+            Google OR-Tools powered optimization engine for intelligent crew allocation, ensuring regulatory compliance and maximizing operational efficiency.
         </p>
-        <div style='margin: 20px 0;'>
-            <span class='feature-badge'>OR-Tools Optimization</span>
+        <div style='margin: 1rem 0 0 0;'>
+            <span class='feature-badge'>OR-Tools CP-SAT Solver</span>
             <span class='feature-badge'>Constraint Management</span>
-            <span class='feature-badge'>Duty Hour Compliance</span>
-            <span class='feature-badge'>Gantt Visualization</span>
-            <span class='feature-badge'>Utilization Analytics</span>
-            <span class='feature-badge'>Real-time Adjustments</span>
+            <span class='feature-badge'>Regulatory Compliance</span>
+            <span class='feature-badge'>Visual Analytics</span>
+            <span class='feature-badge'>Resource Optimization</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
-    
-    st.info("📊 Open **Crew Schedule Optimizer** from the sidebar")
-
-       
-
-st.markdown("<br><br>", unsafe_allow_html=True)
+    st.info("Navigate to Schedule Optimizer module via sidebar")
 
 # ============================================================================
-# SYSTEM INFORMATION
+# TECHNOLOGY STACK
 # ============================================================================
 st.markdown("---")
 
-st.markdown("""
-<div style='background-color: #2d3250; padding: 25px; border-radius: 12px; margin: 30px 0;'>
-    <h3 style='margin-top: 0; color: #60a5fa;'>🔧 System Architecture</h3>
-    <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;'>
-        <div>
-            <h4 style='color: #94a3b8; font-size: 14px; margin-bottom: 10px;'>TECHNOLOGY STACK</h4>
-            <p style='color: #cbd5e1; line-height: 1.8;'>
-                • Python + Streamlit<br>
-                • Scikit-learn ML Models<br>
-                • Google OR-Tools CP-SAT<br>
-                • Plotly Visualizations<br>
-                • Phi-3 AI Copilot (Ollama)
-            </p>
-        </div>
-        <div>
-            <h4 style='color: #94a3b8; font-size: 14px; margin-bottom: 10px;'>DEPLOYMENT</h4>
-            <p style='color: #cbd5e1; line-height: 1.8;'>
-                • Multi-page Application<br>
-                • Shared Session State<br>
-                • Real-time Processing<br>
-                • Persistent Data Storage<br>
-                • Modular Architecture
-            </p>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #e2e8f0; margin: 1.5rem 0; font-size: 1.5rem; font-weight: 600;'>Technology Stack</h3>", unsafe_allow_html=True)
 
-# ============================================================================
-# QUICK START GUIDE
-# ============================================================================
-st.markdown("---")
+col1, col2, col3 = st.columns(3, gap="medium")
 
-with st.expander("📖 Quick Start Guide", expanded=False):
+with col1:
     st.markdown("""
-    ### Getting Started with Azure Wings
-    
-    **Step 1: Launch a Module**
-    - Click on "Launch Risk Predictions" or "Launch Schedule Optimizer" button
-    - The module will automatically open in a new browser window
-    - Keep this main page open to switch between modules
-    
-    **Step 2: Use the Module**
-    - Each module opens independently with full functionality
-    - You can run both modules simultaneously
-    - Simply click the other launch button to open the second module
-    
-    **Step 3: Navigate Between Modules**
-    - Return to this page to launch other modules
-    - All modules can run at the same time
-    - Each module maintains its own session state
-    
-    ---
-    
-    ### Module-Specific Instructions
-    
-    **Risk Predictions Module (screen2.py):**
-    1. Select a prediction model from the radio buttons
-    2. Fill in the required input parameters
-    3. Click "Run Prediction" to get results
-    4. Use the AI Copilot to ask questions about your predictions
-    
-    **Schedule Optimizer Module (screen3.py):**
-    1. Adjust constraints in the sidebar (duty hours, rest time, max flights)
-    2. Click "Generate Schedule" to run optimization
-    3. View results in tabs: Gantt Chart, Crew Assignments, Flight Details, Utilization
-    4. Use "Reset" to clear and start fresh
-    
-    ---
-    
-    ### Troubleshooting
-    
-    **If a module doesn't launch:**
-    - Make sure screen2.py and screen3.py are in the same folder as main.py
-    - Check that all required Python packages are installed
-    - Verify that no other Streamlit apps are using the same port
-    
-    **Manual Launch (Alternative):**
-    - Open a terminal in your project folder
-    - Run: `streamlit run screen2.py` or `streamlit run screen3.py`
-    """)
+    <div class='tech-item'>
+        <strong style='color: #60a5fa; font-size: 1.1rem; display: block; margin-bottom: 0.75rem;'>Artificial Intelligence</strong>
+        <p style='font-size: 0.85rem; color: #94a3b8; margin: 0; line-height: 1.6;'>
+            Scikit-learn ML Framework<br>
+            Phi-3 Language Model<br>
+            Ollama Runtime
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class='tech-item'>
+        <strong style='color: #4ade80; font-size: 1.1rem; display: block; margin-bottom: 0.75rem;'>Optimization Engine</strong>
+        <p style='font-size: 0.85rem; color: #94a3b8; margin: 0; line-height: 1.6;'>
+            Google OR-Tools<br>
+            CP-SAT Constraint Solver<br>
+            Linear Programming
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+    <div class='tech-item'>
+        <strong style='color: #a78bfa; font-size: 1.1rem; display: block; margin-bottom: 0.75rem;'>Data Visualization</strong>
+        <p style='font-size: 0.85rem; color: #94a3b8; margin: 0; line-height: 1.6;'>
+            Plotly Interactive Charts<br>
+            Streamlit Framework<br>
+            Python Analytics
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ============================================================================
-# CURRENT DIRECTORY INFO
+# KEY CAPABILITIES
 # ============================================================================
 st.markdown("---")
-with st.expander("🗂️ System Information", expanded=False):
-    st.markdown(f"**Current Directory:** `{os.getcwd()}`")
-    st.markdown("**Available Python Files:**")
-    python_files = [f for f in os.listdir('.') if f.endswith('.py')]
-    for file in python_files:
-        icon = "✅" if file in ["screen2.py", "screen3.py"] else "📄"
-        st.markdown(f"- {icon} {file}")
+
+col1, col2 = st.columns(2, gap="large")
+
+with col1:
+    st.markdown("""
+    <div class='feature-section' style='border-color: #60a5fa;'>
+        <h4 style='margin: 0 0 0.75rem 0; color: #60a5fa; font-weight: 600; font-size: 1.1rem;'>
+            Risk Intelligence Platform
+        </h4>
+        <ul style='color: #cbd5e1; font-size: 0.9rem; margin: 0; padding-left: 1.3rem; line-height: 1.9;'>
+            <li>Real-time risk scoring and predictive analytics</li>
+            <li>Multi-dimensional analysis across weather, crew, and equipment factors</li>
+            <li>AI-powered decision support with natural language interaction</li>
+            <li>Historical trend analysis and pattern recognition</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class='feature-section' style='border-color: #4ade80;'>
+        <h4 style='margin: 0 0 0.75rem 0; color: #4ade80; font-weight: 600; font-size: 1.1rem;'>
+            Intelligent Optimization
+        </h4>
+        <ul style='color: #cbd5e1; font-size: 0.9rem; margin: 0; padding-left: 1.3rem; line-height: 1.9;'>
+            <li>Automated crew scheduling with constraint satisfaction</li>
+            <li>Regulatory compliance enforcement and validation</li>
+            <li>Resource utilization maximization and efficiency gains</li>
+            <li>Dynamic adjustment capabilities for operational changes</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ============================================================================
+# QUICK START
+# ============================================================================
+st.markdown("---")
+
+with st.expander("Quick Start Guide", expanded=False):
+    col1, col2 = st.columns(2, gap="large")
+    
+    with col1:
+        st.markdown("""
+        **Risk Predictions Module:**
+        
+        1. Select your desired prediction model from the sidebar options
+        2. Input relevant flight and operational parameters
+        3. Execute prediction analysis with a single click
+        4. Review comprehensive AI-generated insights and recommendations
+        5. Interact with the Phi-3 Copilot for deeper analysis and questions
+        """)
+    
+    with col2:
+        st.markdown("""
+        **Schedule Optimizer Module:**
+        
+        1. Configure operational constraints through the sidebar interface
+        2. Define duty hour limits and mandatory rest period requirements
+        3. Generate optimized schedules using the CP-SAT solver
+        4. Analyze results through interactive Gantt charts and metrics
+        5. Export schedules or make real-time adjustments as needed
+        """)
 
 # ============================================================================
 # FOOTER
 # ============================================================================
-st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: #64748b; padding: 20px 0;'>
-    <p>Azure Wings Aviation Platform v2.0</p>
-    <p style='font-size: 0.9rem;'>Powered by Machine Learning • OR-Tools • AI Copilot</p>
+<div style='text-align: center; color: #64748b; padding: 1.25rem 0;'>
+    <p style='margin: 0; font-size: 0.95rem; font-weight: 500;'>
+        <span style='color: #94a3b8;'>Azure Wings Platform</span> <span style='color: #475569;'>v2.0</span>
+    </p>
+    <p style='margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #475569;'>
+        Powered by Machine Learning, Optimization Algorithms & Artificial Intelligence
+    </p>
+    <p style='margin: 0.5rem 0 0 0; font-size: 0.8rem; color: #334155;'>
+        Built for Microsoft Imagine Cup 2026
+    </p>
 </div>
 """, unsafe_allow_html=True)
